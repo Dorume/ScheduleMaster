@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ScheduleMaster.Services;
+using ScheduleMaster.ViewModels;
 
 namespace ScheduleMaster
 {
@@ -19,10 +16,10 @@ namespace ScheduleMaster
 
         public static IServiceProvider Services => Host.Services;
 
-        public static void ConfigureServices(HostBuilderContext host, IServiceCollection services)
-        {
-            
-        }
+        public static void ConfigureServices(HostBuilderContext host, IServiceCollection services) => services
+            .AddViewModel()
+            .AddServices()
+        ;
 
         protected override async void OnStartup(StartupEventArgs e)
         {

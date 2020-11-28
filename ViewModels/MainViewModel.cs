@@ -8,7 +8,7 @@ namespace ScheduleMaster.ViewModels
 
         #region Title
 
-        private string _Title;
+        private string _Title = "ScheduleMaster";
 
         public string Title
         {
