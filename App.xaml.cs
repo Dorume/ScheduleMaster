@@ -2,6 +2,7 @@
 using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ScheduleMaster.Data;
 using ScheduleMaster.Services;
 using ScheduleMaster.ViewModels;
 
@@ -17,6 +18,7 @@ namespace ScheduleMaster
         public static IServiceProvider Services => Host.Services;
 
         public static void ConfigureServices(HostBuilderContext host, IServiceCollection services) => services
+            .AddDatabase(host.Configuration.GetSection("Database"))
             .AddViewModel()
             .AddServices()
         ;
