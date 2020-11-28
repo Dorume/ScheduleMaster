@@ -28,8 +28,8 @@ namespace ScheduleMaster.Data
                             break;
                     }
                 }
-
-                )
+            )
+            .AddTransient<DbInitializer>()
         ;
     }
 }
