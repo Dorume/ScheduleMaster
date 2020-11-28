@@ -1,9 +1,11 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using System;
+using Microsoft.Extensions.Hosting;
 
 namespace ScheduleMaster
 {
     public static class Programm
     {
+        [STAThread]
         public static void Main(string[] args)
         {
             var app =new App();

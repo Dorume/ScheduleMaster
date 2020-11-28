@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -33,9 +34,7 @@ namespace ScheduleMaster.Data
 
             if (await _Db.Subjects.AnyAsync()) return;
 
-            await InitializeSubjects();
-            await InitializeLessons();
-            await InitializeGroups();
+            await InitializeAll();
 
             _Logger.LogInformation("Db initialized for {0}", timer.Elapsed.TotalSeconds);
         }
@@ -46,74 +45,45 @@ namespace ScheduleMaster.Data
         private const int TeachersCount = 10;
         private Teacher[] _Teachers;
 
-        private async Task InitializeSubjects()
-        {
-            var time = Stopwatch.StartNew();
-            _Logger.LogInformation("Initializing subjects");
-            var rnd = new Random();
-            _Subjects = Enumerable.Range(1, SubjectsCount)
-                .Select(s => new Subject
-                {
-                    Name = $"Subject {s}"
-                }).ToArray();
-
-            _Teachers = Enumerable.Range(1, TeachersCount)
-                .Select(s => new Teacher()
-                {
-                    Name = $"Teacher {s}"
-                }).ToArray();
-
-            foreach (var subject in _Subjects)
-            {
-                subject.Teachers.Add(rnd.NextItem(_Teachers));
-            }
-
-            await _Db.Teachers.AddRangeAsync(_Teachers);
-            await _Db.Subjects.AddRangeAsync(_Subjects);
-            await _Db.SaveChangesAsync();
-            _Logger.LogInformation("Initialized subjects for {0}", time.ElapsedMilliseconds);
-        }
-
-
         private const int LessonsCount = 10;
         private Lesson[] _Lessons;
-
-        private async Task InitializeLessons()
-        {
-            Random rnd = new Random();
-            var time = Stopwatch.StartNew();
-            _Logger.LogInformation("Initializing lessons");
-            _Lessons = Enumerable.Range(1, LessonsCount)
-                .Select(l => new Lesson
-                {
-                    Count = rnd.Next(8),
-                    Subject = rnd.NextItem(_Subjects),
-                    Teacher = rnd.NextItem(_Teachers)
-                }).ToArray();
-
-            await _Db.Lessons.AddRangeAsync(_Lessons);
-            await _Db.SaveChangesAsync();
-            _Logger.LogInformation("Initialized lessons for {0}", time.ElapsedMilliseconds);
-
-        }
 
         private const int GroupsCount = 10;
         private Group[] _Groups;
 
-        private async Task InitializeGroups()
+        private async Task InitializeAll()
         {
-            var time = Stopwatch.StartNew();
-            _Logger.LogInformation("Initializing groups");
-            Random rnd = new Random();
-            _Groups = Enumerable.Range(1, GroupsCount)
-                .Select(l => new Group
-                {
-                    Lessons = _Lessons
-                }).ToArray();
+            var rnd = new Random();
+            _Subjects = Enumerable.Range(1,SubjectsCount).Select(s => new Subject
+            {
+                Name = $"Subject {s}"
+            }).ToArray();
+            
+            _Teachers = Enumerable.Range(1,TeachersCount).Select(s => new Teacher
+            {
+                Name = $"TeacherName {s}",
+                Surname = $"TeacherSurname {s}",
+                Patronymic = $"TeacherPatronymic {s}"
+            }).ToArray();
 
+            _Groups = Enumerable.Range(1, GroupsCount).Select(g => new Group
+            {
+                Name = $"Group {g}"
+            }).ToArray();
+            _Lessons = Enumerable.Range(1, LessonsCount).Select(l => new Lesson
+            {
+                Subject = rnd.NextItem(_Subjects),
+                Teacher = rnd.NextItem(_Teachers),
+                Group = rnd.NextItem(_Groups),
+                Count = rnd.Next(9)
+            }).ToArray();
+
+
+            await _Db.Subjects.AddRangeAsync(_Subjects);
+            await _Db.Teachers.AddRangeAsync(_Teachers);
+            await _Db.Lesson.AddRangeAsync(_Lessons);
             await _Db.Groups.AddRangeAsync(_Groups);
             await _Db.SaveChangesAsync();
-            _Logger.LogInformation("Initialized groups for {0}", time.ElapsedMilliseconds);
         }
     }
 }
