@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using ScheduleMaster.Annotations;
 
 namespace ScheduleMaster.ViewModels.Base
 {
