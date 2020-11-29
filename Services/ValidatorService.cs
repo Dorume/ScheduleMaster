@@ -1,16 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Windows.Documents;
+using ScheduleMaster.Services.Interfaces;
 
 namespace ScheduleMaster.Services
 {
-    public static class ValidatorService
+    public class ValidatorService : IValidatorService
     {
-        public static bool Validate<T>(T obj, out string error)
+        public bool Validate<T>(T obj, out string error)
         {
-            ValidationContext context = new ValidationContext(obj);
-            List<ValidationResult> results = new List<ValidationResult>();
-            bool valid = Validator.TryValidateObject(obj, context, results, true);
+            var context = new ValidationContext(obj);
+            var results = new List<ValidationResult>();
+            var valid = Validator.TryValidateObject(obj, context, results, true);
             if (valid)
             {
                 error = "";
