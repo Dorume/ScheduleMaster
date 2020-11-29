@@ -2,7 +2,7 @@
 
 namespace ScheduleMaster.ViewModels
 {
-    public  static class ViewModelRegistrator
+    public static class ViewModelRegistrator
     {
         public static IServiceCollection AddViewModel(this IServiceCollection services) => services
             .AddSingleton<MainViewModel>()

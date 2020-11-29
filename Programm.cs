@@ -1,5 +1,5 @@
-﻿using System;
-using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.Hosting;
+using System;
 
 namespace ScheduleMaster
 {
@@ -8,7 +8,7 @@ namespace ScheduleMaster
         [STAThread]
         public static void Main(string[] args)
         {
-            var app =new App();
+            var app = new App();
             app.InitializeComponent();
             app.Run();
         }

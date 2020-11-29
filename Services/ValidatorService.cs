@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using ScheduleMaster.Services.Interfaces;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Windows.Documents;
-using ScheduleMaster.Services.Interfaces;
 
 namespace ScheduleMaster.Services
 {

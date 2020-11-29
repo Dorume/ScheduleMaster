@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using ScheduleMaster.Services.Interfaces;
-using ScheduleMaster.ViewModels;
 
 namespace ScheduleMaster.Services
 {
