@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Data;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Schedule.ClassLibrary;
 using ScheduleMaster.Services.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace ScheduleMaster.Models
 {
@@ -44,21 +43,21 @@ namespace ScheduleMaster.Models
             #endregion
         }
         /// <summary>
-        /// Проверка на возможность создания объекта типа "Предмет"
+        /// Cоздания объекта типа "Предмет"
         /// </summary>
         /// <param name="name">Имя объекта</param>
         /// <param name="error">Текст ошибки</param>
         /// <returns>Значение true, если объект был успешно создан; в противном случае — значение false.</returns>
         public static bool AddSubject(string name, out string error)
         {
-            var subject = new Subject(){Name = name};
+            var subject = new Subject() { Name = name };
             if (!Validator.Validate(subject, out error)) return false;
             Subjects.Add(subject);
             return true;
         }
 
         /// <summary>
-        /// Проверка на возможность создания объекта типа "Преподаватель"
+        /// Cоздания объекта типа "Преподаватель"
         /// </summary>
         /// <param name="name">Имя</param>
         /// <param name="surname">Фамилия</param>
@@ -70,18 +69,18 @@ namespace ScheduleMaster.Models
         {
             var teacher = new Teacher()
             {
-                Name = name, 
-                Surname = surname, 
-                Patronymic = patronymic, 
+                Name = name,
+                Surname = surname,
+                Patronymic = patronymic,
                 Subjects = subjects
             };
             if (!Validator.Validate(teacher, out error)) return false;
             Teachers.Add(teacher);
             return true;
         }
-        
+
         /// <summary>
-        /// Проверка на возможность создания объекта типа "Дисциплина"
+        /// Cоздания объекта типа "Дисциплина"
         /// </summary>
         /// <param name="teachers">Преподаватели</param>
         /// <param name="subject">Предмет</param>
@@ -102,7 +101,7 @@ namespace ScheduleMaster.Models
         }
 
         /// <summary>
-        /// Проверка на возможность создания объекта типа "Дисциплина"
+        ///  Cоздания объекта типа "Дисциплина"
         /// </summary>
         /// <param name="name">Имя группы</param>
         /// <param name="lessons">Дисциплины</param>

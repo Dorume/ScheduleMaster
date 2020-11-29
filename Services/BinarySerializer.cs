@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ScheduleMaster.Services.Interfaces;
 using System.IO;
-using System.Text;
 using System.Threading.Tasks;
-using ScheduleMaster.Services.Interfaces;
 
 namespace ScheduleMaster.Services
 {

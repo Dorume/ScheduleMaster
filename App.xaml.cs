@@ -1,9 +1,9 @@
-﻿using System;
-using System.Windows;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ScheduleMaster.Services;
 using ScheduleMaster.ViewModels;
+using System;
+using System.Windows;
 
 namespace ScheduleMaster
 {
@@ -11,7 +11,7 @@ namespace ScheduleMaster
     {
         private static IHost _Host;
 
-        public static IHost Host => _Host 
+        public static IHost Host => _Host
             ??= Programm.CreateHostBuilder(Environment.GetCommandLineArgs()).Build();
 
         public static IServiceProvider Services => Host.Services;
